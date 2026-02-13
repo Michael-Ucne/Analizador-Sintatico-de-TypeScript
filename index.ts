@@ -17,12 +17,14 @@ for (const path of files) {
 
     const code = await file.text();
     const tokens = lex(code);
-    const error = parse(tokens);
+    const errors = parse(tokens);
 
     console.log(`\nAnalisis: ${path}`);
-    if (error) {
-        error.snippet = code.split("\n")[error.line - 1];
-        reportError(error);
+    if (errors.length > 0) {
+        for (const error of errors) {
+            error.snippet = code.split("\n")[error.line - 1];
+            reportError(error);
+        }
     } else {
         console.log("Exito! Sin errores.");
     }

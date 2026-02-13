@@ -5,6 +5,8 @@ export enum TokenType {
     Semicolon = "Semicolon",
     OpenBrace = "OpenBrace",
     CloseBrace = "CloseBrace",
+    OpenParen = "OpenParen",
+    CloseParen = "CloseParen",
     EOF = "EOF",
     Unknown = "Unknown"
 }

@@ -49,6 +49,20 @@ export function lex(input: string): Token[] {
             continue;
         }
 
+        if (char === "(") {
+            tokens.push({ type: TokenType.OpenParen, value: "(", line, column });
+            cursor++;
+            column++;
+            continue;
+        }
+
+        if (char === ")") {
+            tokens.push({ type: TokenType.CloseParen, value: ")", line, column });
+            cursor++;
+            column++;
+            continue;
+        }
+
         if (/[=\+\-\*\/]/.test(char)) {
             tokens.push({ type: TokenType.Operator, value: char, line, column });
             cursor++;
@@ -65,7 +79,8 @@ export function lex(input: string): Token[] {
                 column++;
             }
 
-            const type = (value === "let" || value === "const" || value === "func")
+            const keywords = ["let", "const", "var", "func", "function", "if", "else", "while", "for", "return", "break", "continue", "true", "false", "null", "undefined", "class", "interface", "import", "export"];
+            const type = keywords.includes(value)
                 ? TokenType.Keyword
                 : TokenType.Identifier;
 
